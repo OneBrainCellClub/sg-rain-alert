@@ -5,6 +5,11 @@ on:
     - cron: '*/5 * * * *'   # every 5 minutes (GitHub may start runs a few minutes late)
     - cron: '0 1 1 * *'     # monthly keep-alive (1st of the month, 09:00 Singapore time)
   workflow_dispatch:        # lets you press "Run workflow" on GitHub
+    inputs:
+      test:
+        description: 'Send a test message with the current weather'
+        type: boolean
+        default: false
 
 permissions:
   contents: write           # only for the monthly keep-alive commit
@@ -37,7 +42,9 @@ jobs:
           HOME_AREA: ${{ secrets.HOME_AREA }}
           HOME_LAT: ${{ secrets.HOME_LAT }}
           HOME_LON: ${{ secrets.HOME_LON }}
-        run: ./rain-alert.ps1
+          SEND_TEST: ${{ inputs.test }}
+        run: |
+          if ($env:SEND_TEST -eq 'true') { ./rain-alert.ps1 -Test } else { ./rain-alert.ps1 }
 
   # GitHub pauses scheduled workflows in repos with no commits for 60 days.
   # An empty commit once a month keeps the schedule alive.
