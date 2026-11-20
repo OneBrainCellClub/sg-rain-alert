@@ -119,7 +119,7 @@ if ((Test-Path $secretsPath) -and -not $env:GITHUB_ACTIONS) {
 $envMap = @{ telegramBotToken = 'TELEGRAM_BOT_TOKEN'; telegramChatId = 'TELEGRAM_CHAT_ID'; homeArea = 'HOME_AREA'; latitude = 'HOME_LAT'; longitude = 'HOME_LON' }
 foreach ($k in $envMap.Keys) {
     $v = [Environment]::GetEnvironmentVariable($envMap[$k])
-    if ($v) { $cfg | Add-Member -NotePropertyName $k -NotePropertyValue $v.Trim() -Force }
+    if ($v) { $cfg | Add-Member -NotePropertyName $k -NotePropertyValue $v.Trim().Trim([char]0xFEFF).Trim() -Force }
 }
 
 function Test-Missing($v) { -not $v -or "$v" -match 'PASTE|secret|stored encrypted' }
