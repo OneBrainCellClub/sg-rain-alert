@@ -1,0 +1,13 @@
+{
+  "telegramBotToken": "PASTE_YOUR_BOT_TOKEN_HERE",
+  "telegramChatId": "PASTE_YOUR_CHAT_ID_HERE",
+
+  "homeArea": "",
+  "latitude": null,
+  "longitude": null,
+
+  "nearbyAreaRadiusKm": 6,
+  "rainStationRadiusKm": 3,
+  "minRainMm": 0.2,
+  "sendAllClear": true
+}

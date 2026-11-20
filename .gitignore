@@ -1,0 +1,5 @@
+# Local-only files: personal settings, encrypted secrets, state and logs
+config.json
+secrets.dat
+state.json
+rain-alert.log
